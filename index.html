@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Balitung | Kalkulator ROI Mudah!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" type="image/x-icon" href="https://wanoh.digital/assets/img/favicon.ico?v=2">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-white">
+        <div class="container">
+            <img src="assets/img/logo.png" alt="Logo" height="40" class="me-2">
+            <a class="navbar-brand">Balitung</a>
+            
+            <!-- Dropdown Usaha -->
+            <div class="dropdown ms-auto">
+                <button class="btn btn-danger dropdown-toggle" 
+                        type="button" 
+                        id="businessSelector" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                    Pilih Usaha
+                </button>
+                <ul class="dropdown-menu" id="businessList"></ul>
+            </div>
+
+            <!-- Tombol Tambah Usaha -->
+            <button class="btn btn-danger ms-2" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#addBusinessModal">
+                <i class="fas fa-plus"></i> Tambah Usaha
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <div class="container mt-4">
+        <img src="assets/img/banner.png" class="hero-banner img-fluid w-100 rounded-3" alt="Banner">
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4" style="margin-bottom: 100px;">
+        <!-- Dashboard -->
+        <div class="row" id="dashboard">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <h5>Total Modal Awal</h5>
+                        <h2 id="totalModal">Rp0</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <h5>Estimasi Balik Modal</h5>
+                        <h2 id="breakEven">-</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <h5>Profit Bulan Ini</h5>
+                        <h2 id="currentProfit">Rp0</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="mb-5" id="tabContent"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="fixed-footer bg-white">
+        <div class="container">
+            <div class="d-flex justify-content-around">
+                <button class="nav-button active" onclick="showTab('capital')">
+                    <i class="fas fa-coins fa-lg"></i><br>Modal Awal
+                </button>
+                <button class="nav-button" onclick="showTab('income')">
+                    <i class="fas fa-arrow-circle-up fa-lg"></i><br>Pemasukkan
+                </button>
+                <button class="nav-button" onclick="showTab('expense')">
+                    <i class="fas fa-arrow-circle-down fa-lg"></i><br>Pengeluaran
+                </button>
+                <button class="nav-button" onclick="showTab('home')">
+                    <i class="fas fa-question-circle fa-lg"></i><br>Tentang
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Tambah Usaha -->
+    <div class="modal fade" id="addBusinessModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Usaha</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="businessName" class="form-control" placeholder="Nama Usaha">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" onclick="saveBusiness()">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Modal Awal -->
+    <div class="modal fade" id="addCapitalModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Modal Awal</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="capitalName" class="form-control mb-3" placeholder="Nama Modal">
+                    <input type="number" id="capitalQuantity" class="form-control mb-3" placeholder="Jumlah">
+                    <input type="number" id="capitalPrice" class="form-control mb-3" placeholder="Harga Satuan">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" onclick="saveCapital()">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah Pemasukkan/Pengeluaran -->
+    <div class="modal fade" id="addFinanceModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="financeModalTitle"></h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="date" id="financeDate" class="form-control mb-3">
+                    <input type="number" id="financeAmount" class="form-control mb-3" placeholder="Jumlah">
+                    <input type="text" id="financeDescription" class="form-control mb-3" placeholder="Keterangan">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" onclick="saveFinance()">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit/Hapus -->
+    <div class="modal fade" id="editModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Data</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="editModalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Rename/Hapus Usaha -->
+    <div class="modal fade" id="editBusinessModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Usaha</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="editBusinessName" class="form-control mb-3">
+                    <button class="btn btn-danger w-100" onclick="updateBusiness()">
+                        <i class="fas fa-save"></i> Simpan Perubahan
+                    </button>
+                    <button class="btn btn-outline-danger w-100 mt-2" onclick="deleteBusiness()">
+                        <i class="fas fa-trash"></i> Hapus Usaha
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Install -->
+    <div class="modal fade" id="installModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Install Balitung</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="assets/img/logo.png" class="mb-3" style="height: 80px;">
+                    <p>Install Balitung untuk pengalaman terbaik!</p>
+                    <button class="btn btn-danger w-100" onclick="installPWA()">
+                        <i class="fas fa-download"></i> Install Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/app.js"></script>
+    <!-- Service Worker & PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js', { scope: '/' })
+                .then(registration => console.log('Service Worker Registered'))
+                .catch(error => console.error('Service Worker Error:', error));
+        }
+    </script>
+</body>
+</html>

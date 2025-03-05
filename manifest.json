@@ -1,0 +1,21 @@
+{
+    "short_name": "Balitung",
+    "name": "Kalkulator ROI UMKM",
+    "icons": [
+      {
+        "src": "/assets/img/icon.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/assets/img/icon.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#e82b38",
+    "theme_color": "#e82b38",
+    "description": "Aplikasi kalkulator ROI untuk analisis usaha UMKM"
+  }
