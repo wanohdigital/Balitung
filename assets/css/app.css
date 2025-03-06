@@ -3,20 +3,86 @@ body {
     background-color: #f8f9fa;
 }
 
+/* Navbar Responsif */
 .navbar {
-    margin-bottom: 20px;
-    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Sejajarkan elemen kiri, tengah, dan kanan */
+    padding: 10px;
 }
 
 .navbar-brand {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-right: auto; /* Geser logo & nama tools ke tengah */
+    text-align: center;
     color: #000;
 }
 
+.navbar-brand img {
+    height: 35px;
+    margin-right: 10px;
+}
+
+/* Dropdown & Tombol Tambah Usaha */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antara tombol dropdown dan tambah usaha */
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        margin-right: 0; /* Reset margin agar berada di tengah */
+        justify-content: center; /* Pusatkan logo & nama tools */
+        width: 100%; /* Pastikan lebar penuh untuk penempatan tengah */
+    }
+
+    .nav-actions {
+        position: relative; /* Pindahkan tombol ke kanan */
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+
+/* Dropdown & Tombol Tambah Usaha */
+.dropdown {
+    margin-right: 10px; /* Beri jarak antara dropdown dan tombol tambah usaha */
+}
+
+.btn-light {
+    white-space: nowrap; /* Pastikan teks tombol tidak pindah baris */
+}
+
+@media (max-width: 576px) {
+    .navbar-brand span {
+        display: none; /* Sembunyikan nama tools di layar kecil */
+    }
+
+    .dropdown button {
+        font-size: 0.9rem; /* Kecilkan ukuran teks dropdown */
+    }
+
+    .btn-light {
+        font-size: 0.9rem; /* Kecilkan ukuran teks tombol tambah usaha */
+    }
+}
+
+/* Responsive Banner */
 .hero-banner {
-    height: 200px;
-    object-fit: cover;
+    width: 100%; /* Pastikan lebar banner mengikuti layar */
+    height: auto; /* Tinggi otomatis menyesuaikan lebar */
+    object-fit: contain; /* Gambar tidak terpotong, tetap proporsional */
     border-radius: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 576px) {
+    .hero-banner {
+        max-height: 150px; /* Batasi tinggi maksimal di layar kecil */
+    }
 }
 
 .dropdown-menu {

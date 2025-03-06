@@ -245,7 +245,7 @@ function showTab(type) {
                         <h3 class="mb-4">Balitung</h3>
                         <p class="text-muted">
                             Aplikasi untuk menghitung Return on Investment, 
-                            manajemen modal, dan analisis keuangan usaha secara sederhana, mudah dan <strong>gratis</strong>.<br />Bisa diakses tanpa akses internet juga (<strong>offline</strong>).
+                            manajemen modal, dan analisis keuangan usaha secara sederhana, mudah dan <strong>gratis</strong>. Bisa diakses tanpa akses internet juga (<strong>offline</strong>).
                         </p>
                     </div>
                 </div>

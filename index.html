@@ -14,34 +14,37 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-white">
-        <div class="container">
-            <img src="assets/img/logo.png" alt="Logo" height="40" class="me-2">
-            <a class="navbar-brand">Balitung</a>
-            
-            <!-- Dropdown Usaha -->
-            <div class="dropdown ms-auto">
-                <button class="btn btn-danger dropdown-toggle" 
-                        type="button" 
-                        id="businessSelector" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false">
-                    Pilih Usaha
+        <div class="container d-flex flex-wrap align-items-center">
+            <!-- Logo & Nama Tools -->
+            <a class="navbar-brand me-auto mb-2 mb-lg-0">
+                <img src="assets/img/logo.png" alt="Logo" class="me-2">
+                Balitung
+            </a>
+    
+            <!-- Tombol Dropdown & Tambah Usaha -->
+            <div class="nav-actions">
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" 
+                            type="button" 
+                            id="businessSelector" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false">
+                        Pilih Usaha
+                    </button>
+                    <ul class="dropdown-menu" id="businessList"></ul>
+                </div>
+                <button class="btn btn-light" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#addBusinessModal">
+                    <i class="fas fa-plus"></i> Tambah Usaha
                 </button>
-                <ul class="dropdown-menu" id="businessList"></ul>
             </div>
-
-            <!-- Tombol Tambah Usaha -->
-            <button class="btn btn-danger ms-2" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#addBusinessModal">
-                <i class="fas fa-plus"></i> Tambah Usaha
-            </button>
         </div>
     </nav>
 
     <!-- Hero Banner -->
-    <div class="container mt-4">
-        <img src="assets/img/banner.png" class="hero-banner img-fluid w-100 rounded-3" alt="Banner">
+    <div class="container mt-4" id="mainContent">
+        <img src="assets/img/banner.png" class="hero-banner img-fluid w-100 rounded-3 mb-1" alt="Banner">
     </div>
 
     <!-- Main Content -->
@@ -199,7 +202,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="assets/img/logo.png" class="mb-3" style="height: 80px;">
+                    <img src="assets/img/icon.png" class="mb-3" style="height: 80px;">
                     <p>Install Balitung untuk pengalaman terbaik!</p>
                     <button class="btn btn-danger w-100" onclick="installPWA()">
                         <i class="fas fa-download"></i> Install Sekarang
